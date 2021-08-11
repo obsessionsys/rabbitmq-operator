@@ -1,0 +1,16 @@
+{{- if .Values.imageCredentials }}
+{{- $fullName := include "chart.fullname" . -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+  {{- if .Values.annotations }}
+  annotations:
+{{ toYaml .Values.annotations | indent 4 }}
+  {{- end }}
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: {{ template "imagePullSecret" . }}
+{{- end }}

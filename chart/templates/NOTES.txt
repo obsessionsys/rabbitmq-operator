@@ -1,0 +1,20 @@
+1. See the documentations and examples:
+
+URL: https://github.com/rabbitmq/cluster-operator/tree/main/docs/examples
+
+2. For minimal example CR for create rabbitmq deployment "Hello World Example"
+
+Create the file rabbitmq.yaml 
+
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: hello-world
+
+and apply 
+
+$ kubectl apply -f rabbitmq.yaml
+
+And once deployed, you can check what defaults were applied like this (spec section is the most important):
+
+kubectl get -o yaml rabbitmqclusters.rabbitmq.com hello-world
